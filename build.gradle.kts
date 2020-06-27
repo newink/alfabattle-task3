@@ -26,6 +26,9 @@ repositories {
 }
 
 dependencies {
+	implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.10.4")
+
+
 	implementation("org.springframework.boot:spring-boot-starter-websocket")
 	implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")

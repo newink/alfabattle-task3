@@ -1,0 +1,71 @@
+version: '3.4'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181"
+    hostname: zookeeper
+  kafka:
+    image: wurstmeister/kafka
+    command: [start-kafka.sh]
+    ports:
+      - 9092:9092
+    hostname: kafka
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 178.154.247.212
+      KAFKA_CREATE_TOPICS: "fhmulfrab36q2q5ug29j:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_PORT: 9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - "zookeeper"
+  database:
+    image: "postgres" # use latest official postgres version
+    ports:
+      - 5432:5432
+    env_file:
+      - database.env # configure postgres
+    volumes:
+      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+  kib01:
+    image: docker.elastic.co/kibana/kibana:7.8.0
+    container_name: kib01
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://es01:9200
+      ELASTICSEARCH_HOSTS: http://es01:9200
+    networks:
+      - elastic
+networks:
+  elastic:
+    driver: bridge
+volumes:
+  data01:
+    driver: local
+  data02:
+    driver: local
+  data03:
+    driver: local
+  database-data:
+    driver: local

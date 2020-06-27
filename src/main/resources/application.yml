@@ -1,0 +1,16 @@
+spring:
+  elasticsearch:
+    rest:
+      uris: "${ELASTIC_URL:http://localhost:9200}"
+  kafka:
+    bootstrap-servers: "178.154.247.212:29092"
+    template:
+      default-topic: "fhmulfrab36q2q5ug29j"
+  application:
+    name: "alfabattle-contest"
+logging:
+  file:
+    path: "logs/"
+server:
+  port: 8081
+

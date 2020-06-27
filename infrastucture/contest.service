@@ -1,0 +1,12 @@
+[Unit]
+Description=Alfabattle contest app
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/java -jar /home/ubuntu/contest/contest.jar
+Restart=on-failure
+RestartSec=10
+WorkingDirectory=/home/ubuntu/contest
+
+[Install]
+WantedBy=multi-user.target

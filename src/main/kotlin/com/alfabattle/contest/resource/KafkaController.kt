@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import java.math.BigDecimal
 
-@RestController
+//@RestController
 class KafkaController {
 
     private val log by LoggerDelegate()
 
     private val list: MutableList<Payment> = mutableListOf()
 
-    @KafkaListener(
-            topics = ["RAW_PAYMENTS"],
-            containerFactory = "kafkaListenerContainerFactory")
-    fun paymentsListener(@Payload payment: Payment) {
-        log.info("Got message: {}", payment)
-        list.add(payment)
-    }
+//    @KafkaListener(
+//            topics = ["RAW_PAYMENTS"],
+//            containerFactory = "kafkaListenerContainerFactory")
+//    fun paymentsListener(@Payload payment: Payment) {
+//        log.info("Got message: {}", payment)
+//        list.add(payment)
+//    }
 
     @GetMapping("/admin/health")
     fun health(): ResponseEntity<Map<String, String>> {

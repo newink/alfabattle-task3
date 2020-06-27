@@ -22,8 +22,8 @@ import org.springframework.messaging.Message
 import kotlin.random.Random
 
 
-@EnableKafka
-@Configuration
+//@EnableKafka
+//@Configuration
 class KafkaConfiguration {
 
     @Value("\${spring.kafka.bootstrap-servers}")

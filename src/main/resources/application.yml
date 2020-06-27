@@ -1,16 +1,20 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://178.154.247.212:5432/alfa_battle
+    username: alfa_battle
+    password: qwe123
   elasticsearch:
     rest:
       uris: "${ELASTIC_URL:http://localhost:9200}"
-  kafka:
-    bootstrap-servers: "178.154.247.212:29092"
-    template:
-      default-topic: "fhmulfrab36q2q5ug29j"
   application:
     name: "alfabattle-contest"
 logging:
   file:
     path: "logs/"
 server:
-  port: 8081
+  port: 8082
 
+alfabattle:
+  atm-api-host: "https://apiws.alfabank.ru/alfabank/alfadevportal/atm-service"
+  client-secret: "hE3gV2aS4vE0uQ5uE7cT0iD0pO8rW6cW3aS1kK8xE4rH4xN1xK"
+  client-id: "3ae757d5-505c-4e87-ad21-e2a29f37f6f2"
